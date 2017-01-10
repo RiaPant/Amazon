@@ -19,10 +19,14 @@ class Table1(models.Model):
     state = models.CharField(max_length=45, blank=True, null=True)
     pincode = models.CharField(max_length=45, blank=True, null=True)
     locker_capacity = models.CharField(max_length=45, blank=True, null=True)
+ #  def __name(self):
+#return self.locker_name
 
     class Meta:
-        managed = False
-        db_table = 'table1'
+       managed = False
+       db_table = 'table1'
+
+
 
 
 class Table2(models.Model):
@@ -34,5 +38,5 @@ class Table2(models.Model):
     timestamp = models.DateTimeField()
 
     class Meta:
-        managed = False
-        db_table = 'table2'
+       managed = False
+       db_table = 'table2'

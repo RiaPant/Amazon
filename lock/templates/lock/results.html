@@ -1,0 +1,38 @@
+{% extends 'lock/base.html' %}
+{% block main_content %}
+
+
+
+<div class="container" >
+<table class="table">
+    <tr>
+<td width="15px"></td>    
+<th>Locker Id</th>
+   
+    <th>City</th>
+    <th>State</th>
+    <th>Pincode</th>
+<td width="15px"></td>    
+</tr>
+
+{% for ob in obj %}
+
+        <tr class="active">
+<td width="15px"></td>
+            <td>{{ob.locker_id}}</td>
+
+            <td>{{ob.city}}</td>
+            <td>{{ob.state}}</td>
+            <td>{{ ob.pincode }}</td>
+<td width="15px" height="15px"><button width="15px" height="15px" type="button" class="btn btn-success dropdown-toggle">GO</button></td>
+<td width="15px"></td>
+        </tr>
+    
+
+{% endfor%}
+</table>
+</div>
+
+
+
+{% endblock %}
