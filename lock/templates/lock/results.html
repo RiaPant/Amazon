@@ -3,7 +3,7 @@
 <div class ="container">
 <form method="GET" action=''>
 
-<input type='text' name='p' placeholder="Enter pincode"/>
+<input type='text' name='p' placeholder="Enter state or city or pincode"/>
 <input type='submit' value='Find'/>
 </form>
 </div>
@@ -11,7 +11,7 @@
 <br>
 
 <br>
-
+<div class="container"><p><i>You have searched for lockers present in the area: {{query }}</i></p></div>
 <div class="container" >
 <table class="table">
     <tr>
@@ -24,7 +24,7 @@
 <td width="15px"></td>    
 </tr>
 
-{% for ob in obj %}
+{% for ob in a %}
 
         <tr class="active">
 <td width="15px"></td>

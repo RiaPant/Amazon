@@ -19,8 +19,8 @@ class Table1(models.Model):
     state = models.CharField(max_length=45, blank=True, null=True)
     pincode = models.CharField(max_length=45, blank=True, null=True)
     locker_capacity = models.CharField(max_length=45, blank=True, null=True)
- #  def __name(self):
-#return self.locker_name
+    def __str__(self):
+        return self.locker_name
 
     class Meta:
        managed = False
