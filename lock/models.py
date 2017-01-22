@@ -27,16 +27,12 @@ class Table1(models.Model):
        db_table = 'table1'
 
 
-
-
 class Table2(models.Model):
     key = models.AutoField(primary_key=True)
     locker = models.ForeignKey(Table1)
-    empty_slots = models.CharField(max_length=45, blank=True, null=True)
-    filler_slots = models.CharField(max_length=45, blank=True, null=True)
-    no_of_lockers = models.CharField(max_length=45, blank=True, null=True)
-    timestamp = models.DateTimeField()
+    empty_slots_prime = models.IntegerField(blank=True, null=True)
+    empty_slots_standard = models.IntegerField(blank=True, null=True)
 
     class Meta:
-       managed = False
-       db_table = 'table2'
+        managed = False
+        db_table = 'table2'

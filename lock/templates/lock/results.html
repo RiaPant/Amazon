@@ -11,32 +11,48 @@
 <br>
 
 <br>
-<div class="container"><p><i>You have searched for lockers present in the area: {{query }}</i></p></div>
+<div ><blockquote><p><i>You have searched for lockers present in the area: {{query }}</i></p></blockquote></div>
 <div class="container" >
-<table class="table">
-    <tr>
-<td width="15px"></td>    
-<th>Locker Id</th>
+<table class="table" style="text-align: center;">
+    <tr style="text-align: center;">
+  
+<td class="col-md-1"><b>Locker Id</b></td>
+    <td class="col-md-1"><b>Pincode</b></td>
+    <td class="col-md-3"><b>City</b></td>
+    <td class="col-md-3"><b>State</b></td>
+    <td class="col-md-2"><b>Prime Booking</b></td>
+    <td class="col-md-2"><b>Standard Booking</b></td>
    
-    <th>City</th>
-    <th>State</th>
-    <th>Pincode</th>
-<td width="15px"></td>    
 </tr>
 
-{% for ob in a %}
 
-        <tr class="active">
-<td width="15px"></td>
-            <td>{{ob.locker_id}}</td>
+{% for ob in qlist %}
 
-            <td>{{ob.city}}</td>
-            <td>{{ob.state}}</td>
-            <td>{{ ob.pincode }}</td>
-<td width="15px" height="15px"><button width="15px" height="15px" type="button" class="btn btn-success dropdown-toggle">GO</button></td>
-<td width="15px"></td>
+        <tr class="active" >
+	    <td>{{ob.locker__locker_id}}</td>
+            <td>{{ob.locker__pincode}}</td>
+            <td>{{ob.locker__city}}</td>
+            <td>{{ob.locker__state}}</td>
+	   {% if ob.empty_slots_prime == 0  %}
+		<td style="background-color:#A9A9A9;">{{ob.empty_slots_prime}} <span class="glyphicon glyphicon-remove"></span></td>
+	   {% else %}
+   		<td>{{ob.empty_slots_prime}} <a href=""><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>	
+           {% endif %}
+
+	   {% if ob.empty_slots_standard == 0  %}
+		<td style="background-color:#A9A9A9;">{{ob.empty_slots_standard}} <span class="glyphicon glyphicon-remove"></span></td>
+	   {% else %}
+		<td>{{ob.empty_slots_standard}} <a href=""><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>	    
+	   {% endif %}
+
+	    
+            
         </tr>
     
+
+
+
+
 
 {% endfor%}
 </table>
