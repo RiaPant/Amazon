@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lock',
+    'easy_maps',
 )
 
 MIDDLEWARE_CLASSES = (
