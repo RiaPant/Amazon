@@ -1,24 +1,24 @@
 from django.shortcuts import render
-from .models import Table1,Table2
+from .models import Table1,Prime,Standard
 from django.db.models import Q
-
+from .forms import ItemForm,SearchForm
+from itertools import chain
 # Create your views here.
 
 
 def results(request):
-    query = request.GET.get("p")
-    qlist = Table2.objects.all().select_related('locker').values('locker__locker_id','locker__city', 'locker__state',       	'locker__pincode','empty_slots_prime','empty_slots_standard')
-    #a=set()
-    if query:
-	qlist = qlist.filter(
-        Q(locker__city=query)|
-        Q(locker__state__icontains=query)|
-        Q(locker__pincode__icontains=query)).distinct()
+	form = SearchForm()
+	quantity=request.GET.get("quantity")	
+	query = request.GET.get("search")
+	qlist = Prime.objects.all().select_related('locker').values('locker__locker_name','locker__city', 'locker__state','locker__pincode','day2').distinct().order_by('locker__locker_name')
+	qlist1 = Standard.objects.all().select_related('locker').values('locker__locker_name','locker__city', 'locker__state','locker__pincode','day5').distinct().order_by('locker__locker_name')
+	if query:
+	    qlist = qlist.filter(Q(locker__city=query)|Q(locker__state__icontains=query)|Q(locker__pincode__icontains=query)).order_by('locker__locker_name')
+	    qlist1 = qlist1.filter(Q(locker__city=query)|Q(locker__state__icontains=query)|Q(locker__pincode__icontains=query)).order_by('locker__locker_name')
+	items={}
+	mylist = zip(qlist, qlist1)
+	return render(request, 'lock/results.html', {'query':query,'mylist':mylist,'quantity':quantity,'form': form,})
 
-
-#    obj = Table1.objects.filter(state=query)
-#        for o in obj:
-#            l=o.locker_id
-#            if Table2.objects.filter(locker=l).exclude(empty_slots='0'):
-#                a.add(o)
-    return render(request, 'lock/results.html', {'query':query,'qlist':qlist})
+def item(request):
+    form = ItemForm()
+    return render(request,'lock/items.html', {'form': form})

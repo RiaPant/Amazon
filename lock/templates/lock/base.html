@@ -1,4 +1,6 @@
 {% load staticfiles  %}
+{% load lock_extras %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 #logo{
-margin-left:25%;
+margin-left:35%;
 }
 .circle {
   width: 20px;
@@ -27,6 +29,17 @@ margin-left:25%;
 hr.style1{
 	border-top: 1px dashed #8c8b8b;
 }
+.inside{
+display: inline-block;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
 </style>
     </head>
 <body>
@@ -34,7 +47,7 @@ hr.style1{
 
 <div class="jumbotron">
 
-<span><img id="logo" src="{%static 'img/amazon-logo.png' %}" height="auto" width="50%"/></span>
+<span><img id="logo" src="{%static 'img/amazon-logo.png' %}" height="auto" width="30%"/></span>
   
 
 </div>

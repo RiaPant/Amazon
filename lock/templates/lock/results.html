@@ -1,49 +1,69 @@
 {% extends 'lock/base.html' %}
-
-
+{% load staticfiles%}
+{% load lock_extras %}
 
 {% block main_content %}
 
-<br><br>
+<script>
+var quantity = 
+</script>
 <div class ="container">
-<form method="GET" action=''>
-<input type='text' name='p' placeholder="Enter state or city or pincode"/>
-<input type='submit' value='Find'/>
+<form action="{% url 'results' %}"  method="get">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
 </form>
+
+</form>
+
 </div>
 
-<br>
 
 <br>
-<div ><blockquote><p><i>You have searched for lockers present in the area: {{query }}</i></p></blockquote></div>
+<div ><blockquote><p><i>You have searched for lockers present in the area: {{query }}, for {{quantity}} of the locker slots</i></p></blockquote></div>
+
+
+
+
+
 <div class="container" >
 
 <table class="table">
-	{% for ob in qlist %}
+{% for ob in mylist %}
 
-		<tr>
-			<td class=" col-md-1">{{ob.locker__locker_id}}</td>
-			
-			<td class=" col-md-2">{{ob.locker__city}}<br>
-			{{ob.locker__state}}-{{ob.locker__pincode}}</td>
- 
- 			{% if ob.empty_slots_prime == 0  %}
-				<td class=" col-md-1"style="background-color:#DEDEDE;"><b>Prime:</b> 0<span class="glyphicon glyphicon-remove"></span></td>
-	   		{% else %}
-   				<td class=" col-md-1"><input type="radio" name="chooseone" 					value="Prime"><label for="Prime"> Prime: </label> {{ob.empty_slots_prime}}</span></td>	
-	   		{% endif %}
+<tr>	
+    
+    {% for obj in ob %}
 
-	   		{% if ob.empty_slots_standard == 0  %}
-				<td class=" col-md-1"style="background-color:#DEDEDE;"><b>Standard:</b> 0<span class="glyphicon glyphicon-remove"></span></td>
-	   		{% else %}
-				<td class=" col-md-1"><input type="radio" name="chooseone" 					value="Standard"><label for="Standard"> Standard: </label> {{ob.empty_slots_standard}} </td></span>		    
-	   		{% endif %}
-			<td class=" col-md-1"><a href=""><button>Select<br></button></a></td>
+        {%if forloop.first %}
+	    
+            <td class=" col-md-1">{{obj.locker__locker_name}}</td>
+            <td class=" col-md-2">{{obj.locker__city}}<br>{{obj.locker__state}}-{{obj.locker__pincode}}</td>
+            {% if obj.day2 == 0  %}
+                <td class=" col-md-1"style="background-color:#DEDEDE;"><b>Prime:</b> 0<span class="glyphicon glyphicon-remove"></span></td>
+            {% else %}
+		<td class=" col-md-1"><input type="radio" name="chooseone" value="Prime"><label for="Prime"> Prime: </label> {{obj.day2}}</span></td>	
+   	    {% endif %}
+            
+	 {% else %}
+            
+            {% if obj.day5 == 0  %}
+            <td class=" col-md-1"style="background-color:#DEDEDE;"><b>Standard:</b> 0<span class="glyphicon glyphicon-remove"></span></td>
+            {% else %}
+            <td class=" col-md-1"><input type="radio" name="chooseone"value="Standard"><label for="Standard"> Standard: </label> {{obj.day5}} </td></span>
+            <td class=" col-md-1"><a href=""><button>Select<br></button></a></td>				 
+	    
+	    {%endif%}
 
-		</tr>
-		
-	{% endfor%}
+	{%endif%}
+
+    {% endfor%}
+	
+
+</tr>	
+{% endfor%}
 </table>
+
 </div>
 
 
