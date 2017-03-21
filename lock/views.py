@@ -31,7 +31,7 @@ def success(request,quantity="1", name="1"):
 			obj.day2=obj.day2-quantity
 			obj.save()
 	elif q1=="Standard":
-		obj=Standard.objects.get(locker=name).distinct()
+		obj=Standard.objects.get(locker=name)
 		if obj.day5>=quantity:
 			obj.day5=obj.day5-quantity
 			obj.save()
